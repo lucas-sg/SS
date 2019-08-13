@@ -6,12 +6,14 @@ import java.util.ArrayList;
 
 import models.CIMInput;
 import models.Particle;
+import models.ParticleFactory;
 import models.Board;
 
 public class Engine {
     private Board board;
+    private ParticleFactory particleFactory;
 
-    public Output applyCIMAlgorithm(final CIMInput input){
+    public Output applyCIMAlgorithm(final CIMInput input) {
         Instant start, end;
         Duration timeElapsed;
         ArrayList<Particle> neighbours;
@@ -32,7 +34,9 @@ public class Engine {
 
     private void setEnvironment(final CIMInput input) {
         this.board = new Board(input.getL(), input.getM());
+        this.particleFactory = new ParticleFactory();
 
         // TODO: generate Particles with input.getN() and input.getRC()
+        particleFactory.generateRandomParticles(input.getN());
     }
 }

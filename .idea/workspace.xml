@@ -11,41 +11,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/models/Particle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-210">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            <state relative-caret-position="-189">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
               <folding>
-                <element signature="e#188#189#0" expanded="true" />
-                <element signature="e#223#224#0" expanded="true" />
-                <element signature="e#517#518#0" expanded="true" />
-                <element signature="e#541#542#0" expanded="true" />
-                <element signature="e#843#844#0" expanded="true" />
                 <element signature="e#869#870#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/models/Table.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="49" column="30" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
-              <folding>
-                <element signature="e#595#596#0" expanded="true" />
-                <element signature="e#621#622#0" expanded="true" />
-                <element signature="e#646#647#0" expanded="true" />
-                <element signature="e#670#671#0" expanded="true" />
-                <element signature="e#708#709#0" expanded="true" />
-                <element signature="e#734#735#0" expanded="true" />
-                <element signature="e#769#770#0" expanded="true" />
-                <element signature="e#800#801#0" expanded="true" />
-                <element signature="e#834#835#0" expanded="true" />
-                <element signature="e#869#870#0" expanded="true" />
-                <element signature="e#920#921#0" expanded="true" />
-                <element signature="e#949#950#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -100,6 +72,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -134,12 +107,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565359398842</updated>
-      <workItem from="1565359400372" duration="1302000" />
+      <workItem from="1565359400372" duration="1694000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1302000" />
+    <option name="totallyTimeSpent" value="1694000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -179,21 +152,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/models/Particle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-210">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding>
-            <element signature="e#188#189#0" expanded="true" />
-            <element signature="e#223#224#0" expanded="true" />
-            <element signature="e#517#518#0" expanded="true" />
-            <element signature="e#541#542#0" expanded="true" />
-            <element signature="e#843#844#0" expanded="true" />
-            <element signature="e#869#870#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Table.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="499">
@@ -211,6 +169,16 @@
             <element signature="e#869#870#0" expanded="true" />
             <element signature="e#920#921#0" expanded="true" />
             <element signature="e#949#950#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/Particle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-189">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="e#869#870#0" expanded="true" />
           </folding>
         </state>
       </provider>
