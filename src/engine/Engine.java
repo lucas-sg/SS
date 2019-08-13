@@ -40,9 +40,11 @@ public class Engine {
     }
 
     private void setEnvironment(final CIMInput input) {
-        this.board = new Board(input.getL(), input.getM());
-
+        double r1, r2;        
         particleFactory.generateRandomParticles(input.getN());
+        r1 = particleFactory.getBiggestRadius();
+        r2 = particleFactory.getSecondBiggestRadius();
+        this.board = new Board(input, r1, r2);
     }
 
     private OutputRow getOutputRowForParticle(final Particle p) {
@@ -59,7 +61,8 @@ public class Engine {
     }
 
     private ArrayList<Particle> getNeighboursForParticle(final Particle p) {
-        // TODO: Implement the actual algorithm
+        board.getMatrix();
+
         return new ArrayList<>();
     }
 }

@@ -2,8 +2,8 @@ package models;
 
 public class CIMInput {
     private int n;
-    private int l;
-    private int m;
+    private int l; // Board size: L x L
+    private int m; // Field size: M x M
     private double rC; // Interaction radius for each particle
     private double r; // Fixed radius for each particle
 

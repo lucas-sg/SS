@@ -8,11 +8,13 @@ public class ParticleFactory {
     private Random rand;
     private ArrayList<Particle> particles;
     private static int lastParticleID         = 0;
-    private double biggestParticleRadius      = 0.0;
+    private double biggestRadius              = 0.0;
+    private double secondBiggestRadius = 0.0;
     // Quantity of attempts at creating a random particle
     private static final int ALLOWED_ATTEMPTS = 30; // TODO: Redefine
-    
-    public ParticleFactory() {}
+
+    public ParticleFactory() {
+    }
 
     public void generateRandomParticles(int quantity, final double radius) {
         Particle newRandomParticle;
@@ -28,8 +30,8 @@ public class ParticleFactory {
         generateRandomParticles(quantity, 0.0);
     }
 
-    public Particle createParticle(final Point2D center, final double radius, 
-        final Property prop) throws IllegalArgumentException {
+    public Particle createParticle(final Point2D center, final double radius, final Property prop)
+            throws IllegalArgumentException {
         if (checkCorrectParticleDistribution(center, radius) != particles.size()) {
             throw new IllegalArgumentException("Particles cannot overlap");
         }
@@ -38,9 +40,10 @@ public class ParticleFactory {
 
         particle.setParticleId(lastParticleID + 1);
         particles.add(particle);
-        
-        if (particle.getRadius() > biggestParticleRadius) {
-            biggestParticleRadius = particle.getRadius();
+
+        if (particle.getRadius() > biggestRadius) {
+            setSecondBiggestRadius(biggestRadius);
+            setBiggestRadius(particle.getRadius());
         }
 
         return particle;
@@ -128,5 +131,21 @@ public class ParticleFactory {
 
     public ArrayList<Particle> getAllParticles() {
         return particles;
+    }
+
+    public double getBiggestRadius() {
+        return secondBiggestRadius;
+    }
+
+    public void setBiggestRadius(double biggestRadius) {
+        this.biggestRadius = biggestRadius;
+    }
+
+    public double getSecondBiggestRadius() {
+        return secondBiggestRadius;
+    }
+
+    public void setSecondBiggestRadius(double secondBiggestRadius) {
+        this.secondBiggestRadius = secondBiggestRadius;
     }
 }
