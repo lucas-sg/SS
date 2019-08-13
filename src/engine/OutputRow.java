@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 import models.Particle;
 
-public class Output {
+public class OutputRow {
     private ArrayList<Particle> neighbours; 
     private Duration d;
 
-    public Output(final ArrayList<Particle> neighbours, final Duration d) {
+    public OutputRow(final ArrayList<Particle> neighbours, final Duration d) {
         this.setNeighbours(neighbours);
         this.setExecutionDuration(d);
     }

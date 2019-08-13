@@ -5,12 +5,14 @@ public class CIMInput {
     private int l;
     private int m;
     private double rC; // Interaction radius for each particle
+    private double r; // Fixed radius for each particle
 
-    public CIMInput(final int n, final int l, final int m, final double rC) {
+    public CIMInput(final int n, final int l, final int m, final double rC, final double r) {
         this.setN(n);
         this.setL(l);
         this.setM(m);
         this.setRC(rC);
+        this.setR(r);
     }
 
     public int getN() {
@@ -43,5 +45,13 @@ public class CIMInput {
 
     private void setRC(final double rC) {
         this.rC = rC;
+    }
+
+    public double getR() {
+        return r;
+    }
+
+    public void setR(double r) {
+        this.r = r;
     }
 }

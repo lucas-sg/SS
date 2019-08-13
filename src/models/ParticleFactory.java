@@ -7,15 +7,19 @@ import java.util.Random;
 public class ParticleFactory {
     private Random rand;
     private ArrayList<Particle> particles;
-    private static int lastParticleID = 0;
+    private static int lastParticleID         = 0;
+    private double biggestParticleRadius      = 0.0;
     // Quantity of attempts at creating a random particle
     private static final int ALLOWED_ATTEMPTS = 30; // TODO: Redefine
     
     public ParticleFactory() {}
 
     public void generateRandomParticles(int quantity, final double radius) {
+        Particle newRandomParticle;
+
         while (quantity > 0) {
-            createParticle(radius, null);
+            newRandomParticle = createParticle(radius, null);
+            particles.add(newRandomParticle);
             quantity--;
         }
     }
@@ -34,6 +38,10 @@ public class ParticleFactory {
 
         particle.setParticleId(lastParticleID + 1);
         particles.add(particle);
+        
+        if (particle.getRadius() > biggestParticleRadius) {
+            biggestParticleRadius = particle.getRadius();
+        }
 
         return particle;
     }
@@ -116,5 +124,9 @@ public class ParticleFactory {
         }
 
         return checkedParticles;
+    }
+
+    public ArrayList<Particle> getAllParticles() {
+        return particles;
     }
 }
