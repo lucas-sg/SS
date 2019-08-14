@@ -7,9 +7,8 @@ import java.util.Random;
 public class ParticleFactory {
     private Random rand;
     private ArrayList<Particle> particles;
-    private static int lastParticleID         = 0;
     private double biggestRadius              = 0.0;
-    private double secondBiggestRadius = 0.0;
+    private double secondBiggestRadius        = 0.0;
     // Quantity of attempts at creating a random particle
     private static final int ALLOWED_ATTEMPTS = 30; // TODO: Redefine
 
@@ -38,7 +37,6 @@ public class ParticleFactory {
 
         Particle particle = new Particle(center, radius, prop);
 
-        particle.setParticleId(lastParticleID + 1);
         particles.add(particle);
 
         if (particle.getRadius() > biggestRadius) {
@@ -76,7 +74,7 @@ public class ParticleFactory {
     }
 
     public Particle createParticle(final Property prop) {
-        return this.createParticle(0.00, prop);
+        return this.createParticle(0.0, prop);
     }
 
     public Particle createParticle() {
@@ -89,8 +87,8 @@ public class ParticleFactory {
     }
 
     private Point2D generateRandomPoint() {
-        double x = generateRandomDouble(0.00, Board.maxBoardSize);
-        double y = generateRandomDouble(0.00, Board.maxBoardSize);
+        double x = generateRandomDouble(0.0, Board.maxBoardSize);
+        double y = generateRandomDouble(0.0, Board.maxBoardSize);
 
         return new Point2D.Double(x, y);
     }
@@ -106,9 +104,9 @@ public class ParticleFactory {
 
         deltaX = c1.getX() - c2.getX();
         deltaY = c1.getY() - c1.getY();
-        distance = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
+        distance = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY)) - (r1 + r2);
 
-        return distance > 0 ? 1 : distance < 0 ? -1 : 0;
+        return distance > 0.0001 ? 1 : distance < -0.0001 ? -1 : 0;
     }
 
     private int checkCorrectParticleDistribution(final Point2D center, final double radius) {
@@ -119,7 +117,7 @@ public class ParticleFactory {
             curr = particles.get(checkedParticles);
             
             if (getBorderDistanceBetweenCircles(curr.getCenter(), curr.getRadius(), 
-                center, radius) <= 0) {
+                center, radius) <= 0.0001) {
                 break;
             }
 

@@ -4,7 +4,6 @@ import java.awt.geom.Point2D;
 import java.util.HashSet;
 
 public class Particle {
-    private int particleID;
     private Point2D c; // Center
     private double r; // Radius
     private Property p;
@@ -48,10 +47,21 @@ public class Particle {
     }
 
     public void addNeighbour(final Particle neighbour) {
-        neighbours.add(neighbour); // TODO: Override equals
+        neighbours.add(neighbour);
     }
 
-    public void setParticleId(final int newId) {
-        this.particleID = newId;
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Particle)) {
+            return false;
+        }
+
+        Particle other = (Particle) obj;
+
+        return other.getCenter().equals(this.c);
     }
 }

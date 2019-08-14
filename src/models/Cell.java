@@ -1,14 +1,14 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 public class Cell {
     private final Collection<Particle> particles;
     private double size;
 
     public Cell(final double size) {
-        this.particles = new ArrayList<>();
+        this.particles = new HashSet<>();
         this.setSize(size);
     }
 
@@ -24,7 +24,7 @@ public class Cell {
         return size;
     }
 
-    public void setSize(double size) {
+    private void setSize(double size) {
         this.size = size;
     }
 }
