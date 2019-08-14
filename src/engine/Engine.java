@@ -41,10 +41,11 @@ public class Engine {
 
     private void setEnvironment(final CIMInput input) {
         double r1, r2;        
-        particleFactory.generateRandomParticles(input.getN());
+        this.particleFactory.generateRandomParticles(input.getN());
         r1 = particleFactory.getBiggestRadius();
         r2 = particleFactory.getSecondBiggestRadius();
         this.board = new Board(input, r1, r2);
+        this.board.populate(this.particleFactory);
     }
 
     private OutputRow getOutputRowForParticle(final Particle p) {
