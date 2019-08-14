@@ -1,6 +1,10 @@
 package models;
 
+import java.awt.Point;
 import java.awt.geom.Point2D;
+import java.util.Collection;
+
+import engine.CIMInput;
 
 public class Board {
     private int l;
@@ -60,13 +64,13 @@ public class Board {
 
 
     public void populate(final ParticleFactory pf) {
-        Point2D coord;
+        Point cellIndex;
         int i, j;
 
         for (Particle p : pf.getAllParticles()) {
-            coord = p.getCenter();
-            i     = getCellIndexFromCoordinate(coord.getX());
-            j     = getCellIndexFromCoordinate(coord.getY());
+            cellIndex = getCellIndexFromCoordinate(p.getCenter());
+            i         = (int) cellIndex.getX();
+            j         = (int) cellIndex.getY();
             matrix[i][j].addParticle(p);
         }
     }
@@ -77,8 +81,22 @@ public class Board {
         return (double) intD + 0.5 < d ? intD : intD + 1;
     }
 
-    private int getCellIndexFromCoordinate(double d) {
+    private int translateCoordToIndex(double d) {
         d = d / cellSize;
         return roundDouble(d) - 1;
+    }
+
+    public Point getCellIndexFromCoordinate(final Point2D coord) {
+        int x = translateCoordToIndex(coord.getX());
+        int y = translateCoordToIndex(coord.getY());
+        
+        return new Point(x, y);
+    }
+
+    public Collection<Particle> getParticlesFromCell(final Point2D coord) {
+        int i = (int) coord.getX();
+        int j = (int) coord.getY();
+
+        return matrix[i][j].getParticles();
     }
 }

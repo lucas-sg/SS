@@ -1,13 +1,13 @@
 package models;
 
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.ArrayList;;
 
 public class Cell {
     private final Collection<Particle> particles;
 
     public Cell() {
-        this.particles = new HashSet<>();
+        this.particles = new ArrayList<>();
     }
 
     public Collection<Particle> getParticles() {

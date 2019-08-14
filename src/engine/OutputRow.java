@@ -2,23 +2,24 @@ package engine;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import models.Particle;
 
 public class OutputRow {
-    private ArrayList<Particle> neighbours; 
+    private Collection<Particle> neighbours; 
     private Duration d;
 
-    public OutputRow(final ArrayList<Particle> neighbours, final Duration d) {
+    public OutputRow(final Collection<Particle> neighbours, final Duration d) {
         this.setNeighbours(neighbours);
         this.setExecutionDuration(d);
     }
 
-    public ArrayList<Particle> getNeighbours() {
+    public Collection<Particle> getNeighbours() {
         return neighbours;
     }
 
-    private void setNeighbours(final ArrayList<Particle> neighbours) {
+    private void setNeighbours(final Collection<Particle> neighbours) {
         this.neighbours = new ArrayList<>(neighbours);
     }
 

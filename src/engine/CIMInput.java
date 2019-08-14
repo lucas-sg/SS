@@ -1,4 +1,4 @@
-package models;
+package engine;
 
 public class CIMInput {
     private int n;
@@ -8,6 +8,11 @@ public class CIMInput {
     private double r; // Fixed radius for each particle
 
     public CIMInput(final int n, final int l, final int m, final double rC, final double r) {
+        if (r > rC) {
+            throw new IllegalArgumentException("The interaction radius between particles " +
+                "must be greater than their radius");
+        }
+
         this.setN(n);
         this.setL(l);
         this.setM(m);

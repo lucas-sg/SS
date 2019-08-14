@@ -9,10 +9,12 @@ public class ParticleFactory {
     private ArrayList<Particle> particles;
     private double biggestRadius              = 0.0;
     private double secondBiggestRadius        = 0.0;
+    private double rC;
     // Quantity of attempts at creating a random particle
     private static final int ALLOWED_ATTEMPTS = 30; // TODO: Redefine
 
-    public ParticleFactory() {
+    public ParticleFactory(final double interactionRadius) {
+        this.rC = interactionRadius;
     }
 
     public void generateRandomParticles(int quantity, final double radius) {
@@ -109,6 +111,11 @@ public class ParticleFactory {
         return distance > 0.0001 ? 1 : distance < -0.0001 ? -1 : 0;
     }
 
+    public boolean particlesInteract(final Particle p1, final Particle p2) {
+        return getBorderDistanceBetweenCircles(p1.getCenter(), this.rC, 
+            p2.getCenter(), p2.getRadius()) < 0;
+    }
+
     private int checkCorrectParticleDistribution(final Point2D center, final double radius) {
         Particle curr;
         int checkedParticles = 0;
@@ -117,7 +124,7 @@ public class ParticleFactory {
             curr = particles.get(checkedParticles);
             
             if (getBorderDistanceBetweenCircles(curr.getCenter(), curr.getRadius(), 
-                center, radius) <= 0.0001) {
+                center, radius) < 0) {
                 break;
             }
 
@@ -135,7 +142,7 @@ public class ParticleFactory {
         return secondBiggestRadius;
     }
 
-    public void setBiggestRadius(double biggestRadius) {
+    private void setBiggestRadius(double biggestRadius) {
         this.biggestRadius = biggestRadius;
     }
 
@@ -143,7 +150,7 @@ public class ParticleFactory {
         return secondBiggestRadius;
     }
 
-    public void setSecondBiggestRadius(double secondBiggestRadius) {
+    private void setSecondBiggestRadius(double secondBiggestRadius) {
         this.secondBiggestRadius = secondBiggestRadius;
     }
 }

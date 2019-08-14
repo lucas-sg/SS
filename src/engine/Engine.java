@@ -3,18 +3,20 @@ package engine;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collection;
 
-import models.CIMInput;
 import models.Particle;
 import models.ParticleFactory;
 import models.Board;
 
 public class Engine {
+    private CIMInput input;
     private Board board;
     private ParticleFactory particleFactory;
 
-    public Engine() {
-        this.particleFactory = new ParticleFactory();
+    public Engine(final CIMInput input) {
+        this.input = input;
+        this.particleFactory = new ParticleFactory(this.input.getRC());
     }
 
     public ArrayList<OutputRow> applyCIM(final CIMInput input) {
@@ -49,7 +51,7 @@ public class Engine {
     }
 
     private OutputRow getOutputRowForParticle(final Particle p) {
-        ArrayList<Particle> neighbours;
+        Collection<Particle> neighbours;
         Instant start, end;
         Duration timeElapsed;
 
@@ -61,9 +63,25 @@ public class Engine {
         return new OutputRow(neighbours, timeElapsed);
     }
 
-    private ArrayList<Particle> getNeighboursForParticle(final Particle p) {
-        board.getMatrix();
+    private Collection<Particle> getNeighboursForParticle(final Particle p) {
+        Collection<Particle> neighbours = new ArrayList<>();
+        
+        addSameCellNeighbours(p, neighbours);        
 
-        return new ArrayList<>();
+        return new ArrayList<>(); // TODO: Finish the algorithm
+    }
+
+    private void addSameCellNeighbours(final Particle p, Collection<Particle> neighbours) {
+        Collection<Particle> sameCellNeighbours = board.getParticlesFromCell(p.getCenter());
+
+        sameCellNeighbours.remove(p);
+        
+        for (Particle supposedNeighbour : sameCellNeighbours) {
+            if (!particleFactory.particlesInteract(p, supposedNeighbour)) {
+                sameCellNeighbours.remove(supposedNeighbour);
+            }
+        }
+
+        neighbours.addAll(sameCellNeighbours);
     }
 }
