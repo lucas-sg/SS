@@ -1,5 +1,7 @@
 package engine;
 
+import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -19,19 +21,16 @@ public class Engine {
         this.particleFactory = new ParticleFactory(this.input.getRC());
     }
 
-    public ArrayList<OutputRow> applyCIM(final CIMInput input) {
-        setEnvironment(input);
+    public ArrayList<OutputRow> applyCIM() {
+        setEnvironment();
     
-        return cellIndexMethod(input);
+        return cellIndexMethod();
     }
 
-    private ArrayList<OutputRow> cellIndexMethod(final CIMInput input) {
-        ArrayList<Particle> particles;
-        ArrayList<OutputRow> output;
+    private ArrayList<OutputRow> cellIndexMethod() {
+        ArrayList<Particle> particles = particleFactory.getAllParticles();
+        ArrayList<OutputRow> output   = new ArrayList<>();
         OutputRow outputRow;
-
-        particles = particleFactory.getAllParticles();
-        output = new ArrayList<>();
 
         for (Particle p : particles) {
             outputRow = getOutputRowForParticle(p);
@@ -41,7 +40,7 @@ public class Engine {
         return output;
     }
 
-    private void setEnvironment(final CIMInput input) {
+    private void setEnvironment() {
         double r1, r2;        
         this.particleFactory.generateRandomParticles(input.getN());
         r1 = particleFactory.getBiggestRadius();
@@ -60,21 +59,20 @@ public class Engine {
         end         = Instant.now();
         timeElapsed = Duration.between(start, end);
 
-        return new OutputRow(neighbours, timeElapsed);
+        return new OutputRow(p, neighbours, timeElapsed);
     }
 
     private Collection<Particle> getNeighboursForParticle(final Particle p) {
         Collection<Particle> neighbours = new ArrayList<>();
         
         addSameCellNeighbours(p, neighbours);        
+        addLShapeNeighbours(p, neighbours);
 
-        return new ArrayList<>(); // TODO: Finish the algorithm
+        return neighbours;
     }
 
     private void addSameCellNeighbours(final Particle p, Collection<Particle> neighbours) {
         Collection<Particle> sameCellNeighbours = board.getParticlesFromCell(p.getCenter());
-
-        sameCellNeighbours.remove(p);
         
         for (Particle supposedNeighbour : sameCellNeighbours) {
             if (!particleFactory.particlesInteract(p, supposedNeighbour)) {
@@ -83,5 +81,57 @@ public class Engine {
         }
 
         neighbours.addAll(sameCellNeighbours);
+    }
+
+    private void addLShapeNeighbours(final Particle p, Collection<Particle> neighbours) {
+        ArrayList<Point> pointsInLShape     = getLShapePoints(p.getCenter());
+        Collection<Particle> cellNeighbours = new ArrayList<>();
+        Point2D currCell;
+        double i, j;
+
+        
+        for (Point coord : pointsInLShape) {
+            i        = coord.getX();
+            j        = coord.getY();
+            currCell = new Point2D.Double(i, j);
+            
+            cellNeighbours.addAll(board.getParticlesFromCell(currCell));
+        }
+
+        for (Particle supposedNeighbour : cellNeighbours) {
+            if (particleFactory.particlesInteract(p, supposedNeighbour)) {
+                neighbours.add(supposedNeighbour);
+            }
+        }
+    }
+
+    private ArrayList<Point> getLShapePoints(final Point2D coord) {
+        ArrayList<Point> pointsInLShape = new ArrayList<>();
+        Point upCenter, upRight, centerRight, downRight;
+        int x = (int) coord.getX();
+        int y = (int) coord.getY();
+        int m = board.getM();
+
+        if (y + 1 < m) {
+            upCenter = new Point(x, y + 1);
+            pointsInLShape.add(upCenter);
+        }
+
+        if (x + 1 < m) {
+            if (y + 1 < m) {
+                upRight = new Point(x + 1, y + 1);
+                pointsInLShape.add(upRight);
+            }
+
+            centerRight = new Point(x + 1, y);
+            pointsInLShape.add(centerRight);
+
+            if (y - 1 >= 0) {
+                downRight = new Point(x + 1, y - 1);
+                pointsInLShape.add(downRight);
+            }
+        }
+
+        return pointsInLShape;
     }
 }

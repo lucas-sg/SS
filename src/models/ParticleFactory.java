@@ -21,7 +21,7 @@ public class ParticleFactory {
         Particle newRandomParticle;
 
         while (quantity > 0) {
-            newRandomParticle = createParticle(radius, null);
+            newRandomParticle = createParticle(radius);
             particles.add(newRandomParticle);
             quantity--;
         }
@@ -31,13 +31,13 @@ public class ParticleFactory {
         generateRandomParticles(quantity, 0.0);
     }
 
-    public Particle createParticle(final Point2D center, final double radius, final Property prop)
+    public Particle createParticle(final Point2D center, final double radius)
             throws IllegalArgumentException {
         if (checkCorrectParticleDistribution(center, radius) != particles.size()) {
             throw new IllegalArgumentException("Particles cannot overlap");
         }
 
-        Particle particle = new Particle(center, radius, prop);
+        Particle particle = new Particle(center, radius);
 
         particles.add(particle);
 
@@ -49,7 +49,7 @@ public class ParticleFactory {
         return particle;
     }
 
-    public Particle createParticle(final double radius, final Property prop) {
+    public Particle createParticle(final double radius) {
         Point2D randomCenter               = null;
         int checkedParticles               = 0;
         int attempts                       = 0;
@@ -66,21 +66,17 @@ public class ParticleFactory {
             attempts++;
         }
 
-        return this.createParticle(randomCenter, radius, prop);
+        return this.createParticle(randomCenter, radius);
     }
     
-    public Particle createParticleWithRandomRadius(final Property prop) {
+    public Particle createParticleWithRandomRadius() {
         double randomRadius = generateRandomDouble(Particle.minRadius, Particle.maxRadius);
 
-        return this.createParticle(randomRadius, prop);
-    }
-
-    public Particle createParticle(final Property prop) {
-        return this.createParticle(0.0, prop);
+        return this.createParticle(randomRadius);
     }
 
     public Particle createParticle() {
-        return this.createParticle(null);
+        return this.createParticle(0.0);
     }
 
     private double generateRandomDouble(final double min, final double max) {
